@@ -5,16 +5,46 @@
       <UniqueIdentifier>80792f45-6525-4bf6-896f-842fa73cc67d</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dds;dlg;fbx;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tga;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Stage">
+      <UniqueIdentifier>{4e75eb0c-6a03-434b-96a1-f09b9f9be47f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{e612f79d-06a2-4f29-bdce-360290f89bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MainBese">
+      <UniqueIdentifier>{ecb6865b-5f7d-44f6-93a0-9ba2efac7c07}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="StepTimer.h" />
+    <ClInclude Include="Games\Stage\StageBese.h">
+      <Filter>Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>MainBese</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>MainBese</Filter>
+    </ClInclude>
+    <ClInclude Include="StepTimer.h">
+      <Filter>MainBese</Filter>
+    </ClInclude>
+    <ClInclude Include="Games\Object\Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Game.cpp">
+      <Filter>MainBese</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>MainBese</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>MainBese</Filter>
+    </ClCompile>
+    <ClCompile Include="Games\Object\Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
