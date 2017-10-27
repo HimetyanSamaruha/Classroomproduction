@@ -5,9 +5,12 @@
 #include "pch.h"
 #include "Game.h"
 
+#include "Games\Object\Object.h"
+
 extern void ExitGame();
 
 using namespace DirectX;
+using namespace DirectX::SimpleMath;
 
 using Microsoft::WRL::ComPtr;
 
@@ -29,6 +32,17 @@ void Game::Initialize(HWND window, int width, int height)
     CreateDevice();
 
     CreateResources();
+
+	m_batch = std::make_unique<PrimitiveBatch<VertexPositionNormal>>(m_d3dContext.Get());
+	m_effect = std::make_unique<BasicEffect>(m_d3dDevice.Get());
+	m_view = Matrix::CreateLookAt(Vector3(0.f, 2.f, 5.f),
+		Vector3::Zero, Vector3::UnitY);
+	m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
+		float(m_outputWidth) / float(m_outputHeight), 0.1f, 500.f);
+
+	test.InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get());
+
+	test.Initialize();
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
@@ -70,6 +84,7 @@ void Game::Render()
     Clear();
 
     // TODO: Add your rendering code here.
+	test.Draw();
 
     Present();
 }

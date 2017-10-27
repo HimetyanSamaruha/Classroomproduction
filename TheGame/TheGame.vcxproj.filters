@@ -14,6 +14,9 @@
     <Filter Include="MainBese">
       <UniqueIdentifier>{ecb6865b-5f7d-44f6-93a0-9ba2efac7c07}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Asset">
+      <UniqueIdentifier>{06e98ecf-4726-4dc7-a67f-624c38d2ce10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Games\Stage\StageBese.h">
@@ -45,6 +48,9 @@
     <ClCompile Include="Games\Object\Object.cpp">
       <Filter>Object</Filter>
     </ClCompile>
+    <ClCompile Include="Games\Stage\StageBese.cpp">
+      <Filter>Stage</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -58,5 +64,10 @@
     <Manifest Include="settings.manifest">
       <Filter>Assets</Filter>
     </Manifest>
+  </ItemGroup>
+  <ItemGroup>
+    <MeshContentTask Include="Asset\Mori.FBX">
+      <Filter>Asset</Filter>
+    </MeshContentTask>
   </ItemGroup>
 </Project>
