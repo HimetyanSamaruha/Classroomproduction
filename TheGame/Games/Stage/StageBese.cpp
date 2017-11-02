@@ -10,10 +10,11 @@ StageBese::~StageBese()
 
 void StageBese::Initialize()
 {
-	Stage.Load(L"Resources/Mori.cmo");
+	//‘å‚«‚·‚¬‚Ä•`‰æ‚³‚ê‚Ä‚È‚¢‚¾‚¯
+	Stage.Load(L"Resources/Sora.cmo");
 }
 
 void StageBese::Draw()
 {
-	Object3D::Draw();
+	Stage.Draw();
 }

@@ -11,8 +11,13 @@
 #include <VertexTypes.h>
 #include <Effects.h>
 
+#include <Keyboard.h>
+
 #include "Games\Object\Object.h"
 #include "Games\Stage\StageBese.h"
+
+#include "Camera.h"
+#include "DebagCamera.h"
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -78,5 +83,9 @@ private:
 	DirectX::SimpleMath::Matrix m_view;
 	DirectX::SimpleMath::Matrix m_proj;
 
-	StageBese test;
+	//StageBese test;
+	Object3D test;
+	Object3D test2;
+	std::unique_ptr<Camera> camera;
+	std::unique_ptr<DebagCamera> testcamera;
 };

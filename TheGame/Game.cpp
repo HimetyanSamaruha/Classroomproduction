@@ -40,9 +40,30 @@ void Game::Initialize(HWND window, int width, int height)
 	m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
 		float(m_outputWidth) / float(m_outputHeight), 0.1f, 500.f);
 
-	test.InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get());
+	m_effect->SetView(m_view);
+	m_effect->SetProjection(m_proj);
 
-	test.Initialize();
+	m_effect->SetVertexColorEnabled(true);
+
+	void const* shaderByteCode;
+	size_t byteCodeLength;
+
+	m_effect->GetVertexShaderBytecode(&shaderByteCode, &byteCodeLength);
+
+	m_d3dDevice->CreateInputLayout(VertexPositionColor::InputElements,
+		VertexPositionColor::InputElementCount,
+		shaderByteCode, byteCodeLength,
+		m_inputLayout.GetAddressOf());
+
+	camera = std::make_unique<Camera>(m_outputWidth, m_outputHeight);
+
+	//testcamera = std::make_unique<DebagCamera>(m_outputWidth, m_outputHeight);
+
+	Object3D::InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get(),camera.get());
+
+	test.Load(L"Resources/Sora.cmo");
+
+	test2.Load(L"Resources/ground200m.cmo");
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
@@ -69,6 +90,13 @@ void Game::Update(DX::StepTimer const& timer)
     float elapsedTime = float(timer.GetElapsedSeconds());
 
     // TODO: Add your game logic here.
+
+	m_view = camera->GetView();
+
+	camera->Update();
+
+	test.Update();
+
     elapsedTime;
 }
 
@@ -84,7 +112,28 @@ void Game::Render()
     Clear();
 
     // TODO: Add your rendering code here.
+
+	DirectX::CommonStates m_states(m_d3dDevice.Get());
+
+	m_d3dContext->OMSetBlendState(m_states.Opaque(), nullptr, 0xFFFFFFFF);
+	m_d3dContext->OMSetDepthStencilState(m_states.DepthNone(), 0);
+	m_d3dContext->RSSetState(m_states.CullNone());
+
 	test.Draw();
+
+	test2.Draw();
+
+	m_effect->SetWorld(m_world);
+	m_effect->SetView(m_view);
+	m_effect->SetProjection(m_proj);
+
+	m_effect->Apply(m_d3dContext.Get());
+	m_d3dContext->IASetInputLayout(m_inputLayout.Get());
+
+	m_batch->Begin();
+	
+	m_batch->End();
+
 
     Present();
 }

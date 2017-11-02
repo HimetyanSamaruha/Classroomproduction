@@ -5,6 +5,9 @@
 #include <SimpleMath.h>
 #include <Model.h>
 
+//仮
+#include "../../Camera.h"
+
 #pragma once
 
 class Object3D
@@ -13,7 +16,8 @@ public:
 	//
 	static void InitielizeStatic(
 		Microsoft::WRL::ComPtr<ID3D11Device> _device,
-		Microsoft::WRL::ComPtr<ID3D11DeviceContext> _context
+		Microsoft::WRL::ComPtr<ID3D11DeviceContext> _context,
+		Camera* _camera
 	);
 
 protected:
@@ -30,6 +34,9 @@ protected:
 	//汎用ステート
 	static std::unique_ptr<DirectX::CommonStates> States;
 	static std::unique_ptr<DirectX::EffectFactory> Factory;
+
+	//カメラ
+	static Camera* ccamera;
 
 	//スケーリング
 	DirectX::SimpleMath::Vector3 Scale;

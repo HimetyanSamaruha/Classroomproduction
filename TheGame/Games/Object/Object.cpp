@@ -10,13 +10,16 @@ Microsoft::WRL::ComPtr<ID3D11DeviceContext>		Object3D::Context;
 std::unique_ptr<DirectX::CommonStates>			Object3D::States;
 std::unique_ptr<DirectX::EffectFactory>			Object3D::Factory;
 
-void Object3D::InitielizeStatic(Microsoft::WRL::ComPtr<ID3D11Device> _device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> _context)
+Camera* Object3D::ccamera;
+
+void Object3D::InitielizeStatic(Microsoft::WRL::ComPtr<ID3D11Device> _device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> _context, Camera* _camera)
 {
 	Device = _device;
 	Context = _context;
 
 	States = std::make_unique<CommonStates>(Device.Get());
 	Factory = std::make_unique<EffectFactory>(Device.Get());
+	ccamera = _camera;
 
 	Factory->SetDirectory(L"Resources");
 }
@@ -57,7 +60,7 @@ void Object3D::Draw()
 
 	if (ModelDate)
 	{
-		ModelDate->Draw(Context.Get(), *States, World, View,Proj);
+		ModelDate->Draw(Context.Get(), *States, World,ccamera->GetView(), ccamera->GetProj());
 	}
 }
 

@@ -32,4 +32,14 @@ public:
 	virtual void Update();
 
 	const DirectX::SimpleMath::Matrix& GetView();
+
+	const DirectX::SimpleMath::Matrix& GetProj();
+
+	void Seteyepos(const DirectX::SimpleMath::Vector3& eyepos);
+	void Setrefpos(const DirectX::SimpleMath::Vector3& refpos);
+	void Setupvec(const DirectX::SimpleMath::Vector3& upvec);
+	void SetfovY(float fovY);
+	void Settaspect(float aspect);
+	void SetanerClip(float nearclip);
+	void SetfarClip(float farclip);
 };
