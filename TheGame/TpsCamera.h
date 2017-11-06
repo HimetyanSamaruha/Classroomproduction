@@ -1,14 +1,22 @@
 #pragma once
 #include "Camera.h"
+#include "Games\Object\Object.h"
+
+#include <Keyboard.h>
 
 class TpsCamera :public Camera
 {
 private:
-	DirectX::SimpleMath::Vector3 TaegetPos;
+	DirectX::SimpleMath::Vector3 TargetPos;
 
 	float TargetRot;
 	float TargetRotX;
 	float TargetRotZ;
+
+	DirectX::Keyboard* Keyboard;
+	DirectX::Keyboard::KeyboardStateTracker Tracker;
+
+	Object3D* Object;
 
 public:
 	TpsCamera(int w, int h);
@@ -20,5 +28,7 @@ public:
 	void SetAngleX(float tragetangle);
 	void SetAngleZ(float tragetangle);
 
-	//void SetPlayer()
+	void SetKeyboard(DirectX::Keyboard * key);
+
+	void SetObject3D(Object3D* object3D);
 };

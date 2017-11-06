@@ -6,6 +6,7 @@
 #include "Game.h"
 
 #include "Games\Object\Object.h"
+#include "TpsCamera.h"
 
 extern void ExitGame();
 
@@ -55,9 +56,12 @@ void Game::Initialize(HWND window, int width, int height)
 		shaderByteCode, byteCodeLength,
 		m_inputLayout.GetAddressOf());
 
-	camera = std::make_unique<Camera>(m_outputWidth, m_outputHeight);
+	keyboard = std::make_unique<DirectX::Keyboard>();
 
-	//testcamera = std::make_unique<DebagCamera>(m_outputWidth, m_outputHeight);
+	camera = std::make_unique<TpsCamera>(m_outputWidth, m_outputHeight);
+	camera->SetKeyboard(keyboard.get());
+
+	//testcamera = std::make_unique<DebugCamera>(m_outputWidth, m_outputHeight);
 
 	Object3D::InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get(),camera.get());
 
@@ -91,9 +95,11 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here.
 
-	m_view = camera->GetView();
+	//m_view = testcamera->GetCameraMatrix();
 
 	camera->Update();
+
+	//testcamera->Update();
 
 	test.Update();
 

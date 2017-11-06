@@ -54,10 +54,6 @@ void Object3D::Update()
 
 void Object3D::Draw()
 {
-	//仮デバック関数
-	Matrix View = Matrix::CreateLookAt(Vector3(0, 0, 3.0f), Vector3(0, 0, 0), Vector3(0, 1.0f, 0));
-	Matrix Proj = Matrix::CreatePerspectiveFieldOfView(XMConvertToRadians(60.0f), (float)800.0f / 600.0f, 0.1f,1000.0f);
-
 	if (ModelDate)
 	{
 		ModelDate->Draw(Context.Get(), *States, World,ccamera->GetView(), ccamera->GetProj());

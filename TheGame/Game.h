@@ -17,6 +17,7 @@
 #include "Games\Stage\StageBese.h"
 
 #include "Camera.h"
+#include "TpsCamera.h"
 #include "DebagCamera.h"
 
 // A basic game implementation that creates a D3D11 device and
@@ -78,6 +79,7 @@ private:
 	std::unique_ptr<DirectX::BasicEffect> m_effect;
 	std::unique_ptr<DirectX::PrimitiveBatch<DirectX::VertexPositionNormal>> m_batch;
 	Microsoft::WRL::ComPtr<ID3D11InputLayout> m_inputLayout;
+	std::unique_ptr<DirectX::Keyboard> keyboard;
 
 	DirectX::SimpleMath::Matrix m_world;
 	DirectX::SimpleMath::Matrix m_view;
@@ -86,6 +88,6 @@ private:
 	//StageBese test;
 	Object3D test;
 	Object3D test2;
-	std::unique_ptr<Camera> camera;
-	std::unique_ptr<DebagCamera> testcamera;
+	std::unique_ptr<TpsCamera> camera;
+	//std::unique_ptr<DebugCamera> testcamera;
 };
