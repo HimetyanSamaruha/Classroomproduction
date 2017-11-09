@@ -23,6 +23,9 @@
     <Filter Include="Tests\TestCamera">
       <UniqueIdentifier>{1ac2b24c-89cb-42fd-99ce-772783f416aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Player">
+      <UniqueIdentifier>{12e5e241-2c07-42ce-bfeb-89d08723d45c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Games\Stage\StageBese.h">
@@ -49,6 +52,9 @@
     <ClInclude Include="DebagCamera.h">
       <Filter>Tests\TestCamera</Filter>
     </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -74,6 +80,9 @@
     </ClCompile>
     <ClCompile Include="DebagCamera.cpp">
       <Filter>Tests\TestCamera</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -17,17 +17,36 @@ TpsCamera::TpsCamera(int w, int h):
 
 void TpsCamera::Update()
 {
-	Keyboard::State keyboardstate = Keyboard->GetState();
-	Tracker.Update(keyboardstate);
+	if (Keyboard)
+	{
+		Keyboard::State keyboardstate = Keyboard->GetState();
+		Tracker.Update(keyboardstate);
+
+		if (keyboardstate.IsKeyDown(Keyboard::Keys::Right))
+		{
+			TargetRot = TargetRot + 0.02f;
+		}
+
+		if (keyboardstate.IsKeyDown(Keyboard::Keys::Left))
+		{
+			TargetRot = TargetRot - 0.02f;
+		}
+	}
 
 	Vector3 refpos, eyepos;
 
+	SetTrans(Object->GetTranslation());
+	
 	//TPSÉJÉÅÉâ
 	refpos = TargetPos + Vector3(0, 2, 0);
 
 	Vector3 cameraV(0.0f, 0.0f, 5.0f);
 
-	Matrix rot = Matrix::CreateRotationY(TargetRot);
+	Matrix rotY = Matrix::CreateRotationY(TargetRot);
+	Matrix rotX = Matrix::CreateRotationX(TargetRotX);
+	Matrix rotZ = Matrix::CreateRotationX(0);
+
+	Matrix rot = rotZ * rotX*rotY;//Matrix::CreateRotationY(TargetRot);
 	cameraV = Vector3::TransformNormal(cameraV, rot);
 
 	eyepos = refpos + cameraV;
@@ -70,4 +89,19 @@ void TpsCamera::SetKeyboard(DirectX::Keyboard * key)
 void TpsCamera::SetObject3D(Object3D * object3D)
 {
 	Object = object3D;
+}
+
+float TpsCamera::GetAngle()
+{
+	return TargetRot;
+}
+
+float TpsCamera::GetAngleX()
+{
+	return TargetRotX;
+}
+
+float TpsCamera::GetAngleZ()
+{
+	return TargetRotZ;
 }

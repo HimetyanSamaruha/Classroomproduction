@@ -31,4 +31,8 @@ public:
 	void SetKeyboard(DirectX::Keyboard * key);
 
 	void SetObject3D(Object3D* object3D);
+
+	float GetAngle();
+	float GetAngleX();
+	float GetAngleZ();
 };

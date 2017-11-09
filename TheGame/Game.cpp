@@ -59,15 +59,21 @@ void Game::Initialize(HWND window, int width, int height)
 	keyboard = std::make_unique<DirectX::Keyboard>();
 
 	camera = std::make_unique<TpsCamera>(m_outputWidth, m_outputHeight);
+	
 	camera->SetKeyboard(keyboard.get());
-
-	//testcamera = std::make_unique<DebugCamera>(m_outputWidth, m_outputHeight);
 
 	Object3D::InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get(),camera.get());
 
 	test.Load(L"Resources/Sora.cmo");
-
 	test2.Load(L"Resources/ground200m.cmo");
+
+	player = std::make_unique<Player>();
+	player->SetKeyBoard(keyboard.get());
+	player->Load(L"Resources/box.cmo");
+
+	camera->SetObject3D(player.get());
+
+	player->SetPlayerCamera(camera.get());
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
@@ -103,6 +109,8 @@ void Game::Update(DX::StepTimer const& timer)
 
 	test.Update();
 
+	player->Update();
+
     elapsedTime;
 }
 
@@ -125,9 +133,11 @@ void Game::Render()
 	m_d3dContext->OMSetDepthStencilState(m_states.DepthNone(), 0);
 	m_d3dContext->RSSetState(m_states.CullNone());
 
-	test.Draw();
+	//test.Draw();
 
 	test2.Draw();
+
+	player->Draw();
 
 	m_effect->SetWorld(m_world);
 	m_effect->SetView(m_view);

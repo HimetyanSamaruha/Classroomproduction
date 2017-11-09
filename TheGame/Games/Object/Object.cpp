@@ -40,7 +40,7 @@ void Object3D::Update()
 	Matrix scalemat = Matrix::CreateScale(Scale);
 	Matrix rotmat;
 
-	rotmat = Matrix::CreateFromYawPitchRoll(Rotation.x, Rotation.y, Rotation.z);
+	rotmat = Matrix::CreateFromYawPitchRoll(Rotation.y, Rotation.x, Rotation.z);
 
 	Matrix transmat = Matrix::CreateTranslation(Translation);
 
