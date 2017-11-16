@@ -150,7 +150,6 @@ void Game::Render()
 	
 	m_batch->End();
 
-
     Present();
 }
 

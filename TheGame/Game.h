@@ -87,7 +87,7 @@ private:
 	DirectX::SimpleMath::Matrix m_view;
 	DirectX::SimpleMath::Matrix m_proj;
 
-	//StageBese test;
+
 	Object3D test;
 	Object3D test2;
 	std::unique_ptr<TpsCamera> camera;

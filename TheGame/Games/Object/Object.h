@@ -1,3 +1,8 @@
+/// <summary>
+/// モデルの基底クラス
+/// </summary>
+
+//インクルード
 #include <Windows.h>
 #include <wrl\client.h>
 #include <Effects.h>
@@ -10,10 +15,11 @@
 
 #pragma once
 
+//オブジェクト3Dクラス
 class Object3D
 {
 public:
-	//
+	//一番初めの初期化処理
 	static void InitielizeStatic(
 		Microsoft::WRL::ComPtr<ID3D11Device> _device,
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext> _context,
@@ -65,7 +71,7 @@ public:
 	//描画
 	virtual void Draw();
 
-	//セット
+	//セット関数
 	void SetScale(DirectX::SimpleMath::Vector3& _scale)
 	{
 		Scale = _scale;
@@ -88,7 +94,7 @@ public:
 	}
 	void ReUpdate();
 
-	//ゲット
+	//ゲット関数
 	const DirectX::SimpleMath::Vector3& GetScale()
 	{
 		return Scale;
@@ -106,6 +112,7 @@ public:
 		return World;
 	}
 
+	//親を設定する
 	Object3D* GetParent()
 	{
 		return Parent;
