@@ -24,6 +24,7 @@
 #include "DebagCamera.h"
 
 #include "Player.h"
+#include "Enemy.h"
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -101,6 +102,7 @@ private:
 	std::unique_ptr<TpsCamera> camera;
 
 	std::unique_ptr<Player> player;
+	std::unique_ptr<Enemy> enemy;
 
 	//std::unique_ptr<DebugCamera> testcamera;
 };

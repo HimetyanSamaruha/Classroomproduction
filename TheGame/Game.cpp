@@ -75,6 +75,10 @@ void Game::Initialize(HWND window, int width, int height)
 	player->SetKeyBoard(keyboard.get());
 	player->Initialize();
 
+	enemy = std::make_unique<Enemy>();
+	enemy->Initialize();
+	enemy->SetTranslation(Vector3(0, 0, -30));
+
 	camera->SetObject3D(player.get());
 
 	player->SetPlayerCamera(camera.get());
@@ -128,6 +132,8 @@ void Game::Update(DX::StepTimer const& timer)
 
 	player->Update();
 
+	enemy->Update();
+
     elapsedTime;
 }
 
@@ -157,6 +163,7 @@ void Game::Render()
 	test2.Draw();
 
 	player->Draw();
+	enemy->Draw();
 
 	m_effect->SetWorld(m_world);
 	m_effect->SetView(m_view);
