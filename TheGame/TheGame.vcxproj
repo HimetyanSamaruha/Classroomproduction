@@ -160,6 +160,7 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="DebagCamera.h" />
+    <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Games\Object\Object.h" />
     <ClInclude Include="Games\Stage\StageBese.h" />
@@ -167,10 +168,12 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="StepTimer.h" />
     <ClInclude Include="TpsCamera.h" />
+    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="DebagCamera.cpp" />
+    <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Games\Object\Object.cpp" />
     <ClCompile Include="Games\Stage\StageBese.cpp" />
@@ -183,6 +186,7 @@
     </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TpsCamera.cpp" />
+    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -209,6 +213,9 @@
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cmo</ContentOutput>
     </MeshContentTask>
     <MeshContentTask Include="Asset\Sora.FBX">
+      <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cmo</ContentOutput>
+    </MeshContentTask>
+    <MeshContentTask Include="Asset\tree.FBX">
       <ContentOutput Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Resources\%(Filename).cmo</ContentOutput>
     </MeshContentTask>
   </ItemGroup>

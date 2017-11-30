@@ -37,6 +37,9 @@ public:
 	Player();
 	~Player();
 
+	//‰Šú‰»
+	void Initialize();
+
 	//‘€ì‚É‚æ‚éƒAƒNƒVƒ‡ƒ“
 	void Up();
 	void Down();

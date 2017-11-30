@@ -34,10 +34,15 @@ void Game::Initialize(HWND window, int width, int height)
 
     CreateResources();
 
+	//èâä˙âª
 	m_batch = std::make_unique<PrimitiveBatch<VertexPositionNormal>>(m_d3dContext.Get());
 	m_effect = std::make_unique<BasicEffect>(m_d3dDevice.Get());
+
+	//íçéãì_
 	m_view = Matrix::CreateLookAt(Vector3(0.f, 2.f, 5.f),
 		Vector3::Zero, Vector3::UnitY);
+
+	//âúçs
 	m_proj = Matrix::CreatePerspectiveFieldOfView(XM_PI / 4.f,
 		float(m_outputWidth) / float(m_outputHeight), 0.1f, 500.f);
 
@@ -57,23 +62,33 @@ void Game::Initialize(HWND window, int width, int height)
 		m_inputLayout.GetAddressOf());
 
 	keyboard = std::make_unique<DirectX::Keyboard>();
-
 	camera = std::make_unique<TpsCamera>(m_outputWidth, m_outputHeight);
-	
 	camera->SetKeyboard(keyboard.get());
-
 	Object3D::InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get(),camera.get());
 
-	test.Load(L"Resources/Sora.cmo");
-	test2.Load(L"Resources/ground200m.cmo");
+	//test.Load(L"Resources/tree.cmo");
+	//test2.Load(L"Resources/ground200m.cmo");
+
+	Stage1.Initialize();
 
 	player = std::make_unique<Player>();
 	player->SetKeyBoard(keyboard.get());
-	player->Load(L"Resources/box.cmo");
+	player->Initialize();
 
 	camera->SetObject3D(player.get());
 
 	player->SetPlayerCamera(camera.get());
+
+	/*trees.resize(300);
+
+	static int b = 0;
+
+	for (auto& i : trees)
+	{
+		b++;
+		i.Load(L"Resources/tree.cmo");
+		i.SetTranslation(Vector3(b, 0, (b/100)+3));
+	}*/
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
@@ -109,6 +124,8 @@ void Game::Update(DX::StepTimer const& timer)
 
 	test.Update();
 
+	Stage1.Update();
+
 	player->Update();
 
     elapsedTime;
@@ -133,7 +150,9 @@ void Game::Render()
 	m_d3dContext->OMSetDepthStencilState(m_states.DepthNone(), 0);
 	m_d3dContext->RSSetState(m_states.CullNone());
 
-	//test.Draw();
+	Stage1.Draw();
+
+	test.Draw();
 
 	test2.Draw();
 

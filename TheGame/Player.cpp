@@ -32,6 +32,16 @@ Player::~Player()
 }
 
 /// <summary>
+/// 初期化
+/// 引数 void
+/// 返り値 void
+/// </summary>
+void Player::Initialize()
+{
+	Load(L"Resources/box.cmo");
+}
+
+/// <summary>
 /// 前に進む
 /// 引数　void
 /// 返り値　void

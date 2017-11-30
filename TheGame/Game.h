@@ -12,9 +12,12 @@
 #include <Effects.h>
 
 #include <Keyboard.h>
+#include <vector>
 
 #include "Games\Object\Object.h"
 #include "Games\Stage\StageBese.h"
+
+#include "Tree.h"
 
 #include "Camera.h"
 #include "TpsCamera.h"
@@ -90,6 +93,11 @@ private:
 
 	Object3D test;
 	Object3D test2;
+
+	std::vector<Tree> trees;
+
+	StageBese Stage1;
+
 	std::unique_ptr<TpsCamera> camera;
 
 	std::unique_ptr<Player> player;
