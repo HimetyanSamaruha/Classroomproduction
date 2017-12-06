@@ -6,9 +6,15 @@ using namespace DirectX::SimpleMath;
 bool CollisionNode::m_DebugVisible = true;
 
 
-void CollisionNode::SetParent(Obj3d * parent)
+void CollisionNode::SetParent(Object3D * parent)
 {
-	m_Obj.Set_perant(parent);
+	m_Obj.SetParent(parent);
+}
+
+void CollisionNode::SetTrans(DirectX::SimpleMath::Vector3 & trans)
+{
+	 m_Trans = trans; 
+	 m_Obj.SetTranslation(trans); 
 }
 
 SphereNode::SphereNode()
@@ -19,19 +25,20 @@ SphereNode::SphereNode()
 
 void SphereNode::Initialize()
 {
-	m_Obj.LoadModel(L"Resources/Sphere.cmo");
+	m_Obj.Load(L"Resources/Sphere.cmo");
 }
 
 void SphereNode::Update()
 {
 
-	m_Obj.Set_trans(m_Trans);
-	m_Obj.Set_scale(Vector3(m_localRadius));
+	m_Obj.SetTranslation(m_Trans);
+
+	m_Obj.SetScale(Vector3(m_localRadius));
 
 	m_Obj.Update();
 
 	{// 判定球の要素を計算
-		const Matrix& worldm = m_Obj.Get_world();
+		const Matrix& worldm = m_Obj.GetWorld();
 
 		// モデル座標系での中心点
 		Vector3 center(0, 0, 0);
@@ -50,8 +57,8 @@ void SphereNode::Update()
 
 void SphereNode::Render()
 {
-	m_Obj.Set_trans(m_Trans);
-	m_Obj.Set_scale(Vector3(m_localRadius));
+	m_Obj.SetTranslation(m_Trans);
+	m_Obj.SetTranslation(Vector3(m_localRadius));
 
 	if (GetDebugVisible()) { m_Obj.Draw(); }
 }
@@ -67,12 +74,12 @@ BoxNode::BoxNode()
 
 void BoxNode::Initialize() 
 {
-	m_Obj.LoadModel(L"Resources/boxNode.cmo");
+	m_Obj.Load(L"Resources/box.cmo");
 }
 
 void BoxNode::Update()
 {
-	m_Obj.Set_trans(m_Trans);
+	m_Obj.SetTranslation(m_Trans);
 	SetPointPos();
 
 	m_Obj.Update();
@@ -80,7 +87,7 @@ void BoxNode::Update()
 
 void BoxNode::Render()
 {
-	m_Obj.Set_trans(m_Trans);
+	m_Obj.SetTranslation(m_Trans);
 	if (GetDebugVisible()) { m_Obj.Draw(); }
 }
 
@@ -117,19 +124,19 @@ CapsuleNode::CapsuleNode()
 
 void CapsuleNode::Initialize()
 {
-	m_Obj.LoadModel(L"Resources/CapsuleNode.cmo");
+	//m_Obj.LoadModel(L"Resources/CapsuleNode.cmo");
 }
 
 void CapsuleNode::Update()
 {
-	m_Obj.Set_trans(m_Trans);
+	m_Obj.SetTranslation(m_Trans);
 	SetPos();
 	m_Obj.Update();
 }
 
 void CapsuleNode::Render()
 {
-	m_Obj.Set_trans(m_Trans);
+	m_Obj.SetTranslation(m_Trans);
 	if (GetDebugVisible()) { m_Obj.Draw(); }
 }
 

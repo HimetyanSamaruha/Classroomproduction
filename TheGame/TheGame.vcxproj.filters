@@ -32,6 +32,9 @@
     <Filter Include="Object\Tree">
       <UniqueIdentifier>{64e54e22-f6b3-4b7b-bf77-fe534879c82c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Hit">
+      <UniqueIdentifier>{b48ba6dc-6458-47bb-9e03-c6232b6c7a34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Games\Stage\StageBese.h">
@@ -66,6 +69,12 @@
     </ClInclude>
     <ClInclude Include="Tree.h">
       <Filter>Object\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\Collision.h">
+      <Filter>Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision\CollisionNode.h">
+      <Filter>Hit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -102,6 +111,12 @@
     <ClCompile Include="Enemy.cpp">
       <Filter>Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Collision\Collision.cpp">
+      <Filter>Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision\CollisionNode.cpp">
+      <Filter>Hit</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
@@ -130,6 +145,9 @@
       <Filter>Assets</Filter>
     </MeshContentTask>
     <MeshContentTask Include="Asset\tree.FBX">
+      <Filter>Assets</Filter>
+    </MeshContentTask>
+    <MeshContentTask Include="Asset\sphere.FBX">
       <Filter>Assets</Filter>
     </MeshContentTask>
   </ItemGroup>

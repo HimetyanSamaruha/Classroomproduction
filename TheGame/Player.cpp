@@ -39,6 +39,15 @@ Player::~Player()
 void Player::Initialize()
 {
 	Load(L"Resources/box.cmo");
+	PlayerHit.Initialize();
+	PlayerRangeHit.Initialize();
+
+	PlayerRangeHit.SetLocalRadius(20.0f);
+	
+	//デバック関数
+	PlayerRangeHit.SetTrans(GetTranslation());
+
+	PlayerRangeHit.Update();
 }
 
 /// <summary>
@@ -187,8 +196,22 @@ void Player::Update()
 		Jamp();
 	}
 
-	Object3D::Update();
+	PlayerHit.SetTrans(GetTranslation());
+	PlayerRangeHit.SetTrans(GetTranslation()+Vector3(0,0.5f,0));
+}
 
+void Player::ReUpdate()
+{
+	Object3D::Update();
+	PlayerHit.Update();
+	PlayerRangeHit.Update();
+}
+
+//デバック関数
+void Player::Render()
+{
+	PlayerHit.Render();
+	PlayerRangeHit.Render();
 }
 
 /// <summary>
@@ -207,4 +230,14 @@ void Player::SetKeyBoard(DirectX::Keyboard * key)
 void Player::SetPlayerCamera(TpsCamera * camera)
 {
 	Playercamera = camera;
+}
+
+BoxNode& Player::GetPlayerHitBox()
+{
+	return PlayerHit;
+}
+
+SphereNode & Player::GetPlayerHitRange()
+{
+	return PlayerRangeHit;
 }

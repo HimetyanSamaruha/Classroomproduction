@@ -95,19 +95,19 @@ public:
 	void ReUpdate();
 
 	//ÉQÉbÉgä÷êî
-	const DirectX::SimpleMath::Vector3& GetScale()
+	DirectX::SimpleMath::Vector3& GetScale()
 	{
 		return Scale;
 	}
-	const DirectX::SimpleMath::Vector3& GetRotation()
+	DirectX::SimpleMath::Vector3& GetRotation()
 	{
 		return Rotation;
 	}
-	const DirectX::SimpleMath::Vector3& GetTranslation()
+	DirectX::SimpleMath::Vector3& GetTranslation()
 	{
 		return Translation;
 	}
-	const DirectX::SimpleMath::Matrix& GetWorld()
+	DirectX::SimpleMath::Matrix& GetWorld()
 	{
 		return World;
 	}

@@ -104,5 +104,7 @@ private:
 	std::unique_ptr<Player> player;
 	std::unique_ptr<Enemy> enemy;
 
+	int j;
+
 	//std::unique_ptr<DebugCamera> testcamera;
 };

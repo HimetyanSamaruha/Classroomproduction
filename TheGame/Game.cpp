@@ -8,6 +8,8 @@
 #include "Games\Object\Object.h"
 #include "TpsCamera.h"
 
+#include "Collision\Collision.h"
+
 extern void ExitGame();
 
 using namespace DirectX;
@@ -66,33 +68,26 @@ void Game::Initialize(HWND window, int width, int height)
 	camera->SetKeyboard(keyboard.get());
 	Object3D::InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get(),camera.get());
 
-	//test.Load(L"Resources/tree.cmo");
-	//test2.Load(L"Resources/ground200m.cmo");
-
+	//森ステージの生成
 	Stage1.Initialize();
 
+	//プレイヤークラスの生成
 	player = std::make_unique<Player>();
 	player->SetKeyBoard(keyboard.get());
 	player->Initialize();
 
+	//敵の生成
 	enemy = std::make_unique<Enemy>();
 	enemy->Initialize();
 	enemy->SetTranslation(Vector3(0, 0, -30));
 
+	//カメラの視点をプレイヤーにセット
 	camera->SetObject3D(player.get());
 
+	//カメラの情報をプレイヤーにセット
 	player->SetPlayerCamera(camera.get());
 
-	/*trees.resize(300);
-
-	static int b = 0;
-
-	for (auto& i : trees)
-	{
-		b++;
-		i.Load(L"Resources/tree.cmo");
-		i.SetTranslation(Vector3(b, 0, (b/100)+3));
-	}*/
+	j = 0;
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
@@ -120,8 +115,6 @@ void Game::Update(DX::StepTimer const& timer)
 
     // TODO: Add your game logic here.
 
-	//m_view = testcamera->GetCameraMatrix();
-
 	camera->Update();
 
 	//testcamera->Update();
@@ -131,8 +124,38 @@ void Game::Update(DX::StepTimer const& timer)
 	Stage1.Update();
 
 	player->Update();
-
 	enemy->Update();
+
+	Vector3 p;
+
+	//あたり判定
+	for (int i = 0; i < Stage1.GetTrees(); i++)
+	{
+		//木とプレイヤーのあたり判定
+		Box Player = player->GetPlayerHitBox();
+		Box ki = Stage1.GetTreesHit(i);
+
+		//あたり判定するを許可する範囲
+		Sphere Range = player->GetPlayerHitRange();
+		
+		//この範囲の確認
+		//木の数が多いと重くなってしまう
+		if (CheckSphere2Box(Range, ki, &Vector3(0, 0, 0)))
+		{
+			Stage1.ViewChangeOn(i);
+			//ヒットしたら
+			if (CheckBox2BoxAABB(Player, ki, &p))
+			{
+				//仮変数
+				j++;
+			}
+		}
+		else
+		{
+			Stage1.ViewChangeOff(i);
+		}
+	}
+	player->ReUpdate();
 
     elapsedTime;
 }
@@ -158,11 +181,8 @@ void Game::Render()
 
 	Stage1.Draw();
 
-	test.Draw();
-
-	test2.Draw();
-
 	player->Draw();
+	//player->Render();
 	enemy->Draw();
 
 	m_effect->SetWorld(m_world);

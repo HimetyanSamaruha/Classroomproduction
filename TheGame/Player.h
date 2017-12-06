@@ -7,6 +7,7 @@
 #include "Games\Object\Object.h"
 #include <Keyboard.h>
 #include "TpsCamera.h"
+#include "Collision\CollisionNode.h"
 
 /// <summary>
 /// プレイヤークラス
@@ -31,6 +32,11 @@ private:
 	//範囲
 	float dir;
 
+	//あたり判定の形
+	BoxNode PlayerHit;
+
+	SphereNode PlayerRangeHit;
+
 public:
 
 	//コンストラクタデストラクタ
@@ -49,8 +55,14 @@ public:
 
 	//更新処理
 	void Update();
+	void ReUpdate();
+	void Render();
 
 	//セット関数
 	void SetKeyBoard(DirectX::Keyboard* key);
 	void SetPlayerCamera(TpsCamera* camera);
+
+	//ゲット関数
+	BoxNode& GetPlayerHitBox();
+	SphereNode& GetPlayerHitRange();
 };

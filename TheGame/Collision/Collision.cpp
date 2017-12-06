@@ -343,6 +343,7 @@ bool CheckSphere2Box(const Sphere& _sphere, const Box& _box, Vector3* _inter)
 
 	Triangle boxTriangle[12];
 
+	//三角形を作成
 	ComputeTriangle(_box.Pos0, _box.Pos1, _box.Pos2, &boxTriangle[0]);
 	ComputeTriangle(_box.Pos1, _box.Pos2, _box.Pos3, &boxTriangle[1]);
 	ComputeTriangle(_box.Pos1, _box.Pos5, _box.Pos3, &boxTriangle[2]);
@@ -356,6 +357,7 @@ bool CheckSphere2Box(const Sphere& _sphere, const Box& _box, Vector3* _inter)
 	ComputeTriangle(_box.Pos2, _box.Pos3, _box.Pos7, &boxTriangle[10]);
 	ComputeTriangle(_box.Pos2, _box.Pos7, _box.Pos6, &boxTriangle[11]);
 
+	//球と箱のあたり判定
 	if (
 		CheckSphere2Triangle(_sphere,boxTriangle[0],&p) || 
 		CheckSphere2Triangle(_sphere, boxTriangle[1], &p) ||
@@ -371,6 +373,7 @@ bool CheckSphere2Box(const Sphere& _sphere, const Box& _box, Vector3* _inter)
 		CheckSphere2Triangle(_sphere, boxTriangle[11], &p)
 		)
 	{
+		//当たっている
 		if (_inter) 
 		{
 			*_inter = p;
@@ -378,6 +381,7 @@ bool CheckSphere2Box(const Sphere& _sphere, const Box& _box, Vector3* _inter)
 		return true;
 	}
 
+	//当たっていない
 	return false;
 }
 
@@ -390,12 +394,12 @@ bool CheckSphere2Box(const Sphere& _sphere, const Box& _box, Vector3* _inter)
 /// <returns></returns>
 bool CheckBox2BoxAABB(Box _box1, Box _box2, Vector3* _inter) 
 {
-	if (_box1.Pos2.x > _box2.Pos5.x) return false;
-	if (_box1.Pos5.x < _box2.Pos2.x) return false;
-	if (_box1.Pos2.y > _box2.Pos5.y) return false;
-	if (_box1.Pos5.y < _box2.Pos2.y) return false;
-	if (_box1.Pos2.z > _box2.Pos5.z) return false;
-	if (_box1.Pos5.z < _box2.Pos2.z) return false;
+	if (_box1.Pos0.x > _box2.Pos7.x)return false;
+	if (_box1.Pos7.x < _box2.Pos0.x)return false;
+	if (_box1.Pos0.y > _box2.Pos7.y)return false;
+	if (_box1.Pos7.y < _box2.Pos0.y)return false;
+	if (_box1.Pos0.z > _box2.Pos7.z)return false;
+	if (_box1.Pos7.z < _box2.Pos0.z)return false;
 	return true;   // 衝突！！
 }
 

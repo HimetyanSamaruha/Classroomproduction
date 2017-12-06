@@ -5,7 +5,7 @@
 //__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/__/
 #pragma once
 
-#include "..\\Model\Obj3d.h"
+#include "../Games/Object/Object.h"
 #include "Collision.h"
 
 // 当たり判定ノード //
@@ -29,7 +29,7 @@ public:
 protected:
 // メンバ変数
 	//デバッグ表示用オブジェクト
-	Obj3d m_Obj;
+	Object3D m_Obj;
 
 	DirectX::SimpleMath::Vector3 m_Trans;
 public:
@@ -41,9 +41,9 @@ public:
 	// 描画処理
 	virtual void Render() = 0;
 
-	void SetParent(Obj3d* parent);
+	void SetParent(Object3D* parent);
 
-	void SetTrans(const DirectX::SimpleMath::Vector3& trans) { m_Trans = trans; m_Obj.Set_trans(trans); }
+	void SetTrans(DirectX::SimpleMath::Vector3& trans);
 
 };
 
@@ -90,7 +90,7 @@ public:
 	void Render();
 
 	// 各辺の大きさを設定する
-	void SetSize(DirectX::SimpleMath::Vector3 size) { m_size = size; m_Obj.Set_scale(size / 2); }
+	void SetSize(DirectX::SimpleMath::Vector3 size) { m_size = size;DirectX::SimpleMath::Vector3 Lsize = size /2; m_Obj.SetScale(Lsize); }
 
 	// 各辺の大きさで頂点を設定する
 	void SetPointPos();
