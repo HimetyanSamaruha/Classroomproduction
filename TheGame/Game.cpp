@@ -87,8 +87,6 @@ void Game::Initialize(HWND window, int width, int height)
 	//カメラの情報をプレイヤーにセット
 	player->SetPlayerCamera(camera.get());
 
-	j = 0;
-
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
     /*
@@ -117,10 +115,6 @@ void Game::Update(DX::StepTimer const& timer)
 
 	camera->Update();
 
-	//testcamera->Update();
-
-	test.Update();
-
 	Stage1.Update();
 
 	player->Update();
@@ -147,14 +141,16 @@ void Game::Update(DX::StepTimer const& timer)
 			if (CheckBox2BoxAABB(Player, ki, &p))
 			{
 				//仮変数
-				j++;
+				player->Stop();
 			}
 		}
 		else
 		{
+			//それ以外
 			Stage1.ViewChangeOff(i);
 		}
 	}
+	//再更新
 	player->ReUpdate();
 
     elapsedTime;
@@ -179,10 +175,12 @@ void Game::Render()
 	m_d3dContext->OMSetDepthStencilState(m_states.DepthNone(), 0);
 	m_d3dContext->RSSetState(m_states.CullNone());
 
+	//ステージ丸ごと描画
 	Stage1.Draw();
 
+	//プレイヤーの描画
 	player->Draw();
-	//player->Render();
+	//エネミーの描画
 	enemy->Draw();
 
 	m_effect->SetWorld(m_world);

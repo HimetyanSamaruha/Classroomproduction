@@ -1,5 +1,11 @@
+/// <summary>
+/// StageBeseクラス(基底)
+/// </summary>
 #pragma once
 
+/// <summary>
+/// インクルード
+/// </summary>
 #include "../Object/Object.h"
 #include "../../Tree.h"
 #include <vector>
@@ -9,8 +15,10 @@ class StageBese:public Object3D
 {
 private:
 
+	//空間のモデル
 	std::vector<Object3D> Stage;
 
+	//木モデル
 	Tree Tree;
 
 	enum NUMBER
@@ -20,14 +28,19 @@ private:
 
 public:
 
+	//コンストラクタ
 	StageBese();
 
+	//デストラクタ
 	~StageBese();
 
+	//初期化
 	virtual void Initialize();
 
+	//描画
 	void Draw() override;
 
+	//木の判定を渡す
 	BoxNode& GetTreesHit(int i);
 
 	//表示非表示

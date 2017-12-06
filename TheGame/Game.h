@@ -91,10 +91,6 @@ private:
 	DirectX::SimpleMath::Matrix m_view;
 	DirectX::SimpleMath::Matrix m_proj;
 
-
-	Object3D test;
-	Object3D test2;
-
 	std::vector<Tree> trees;
 
 	StageBese Stage1;
@@ -103,8 +99,4 @@ private:
 
 	std::unique_ptr<Player> player;
 	std::unique_ptr<Enemy> enemy;
-
-	int j;
-
-	//std::unique_ptr<DebugCamera> testcamera;
 };

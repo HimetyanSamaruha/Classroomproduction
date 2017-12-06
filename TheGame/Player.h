@@ -53,6 +53,9 @@ public:
 	void Left();
 	void Jamp();
 
+	//“–‚½‚Á‚½‚Æ‚«‚Ìˆ—
+	void Stop();
+
 	//XVˆ—
 	void Update();
 	void ReUpdate();

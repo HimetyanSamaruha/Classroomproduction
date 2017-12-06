@@ -38,15 +38,15 @@ Player::~Player()
 /// </summary>
 void Player::Initialize()
 {
+	//モデルデータのロード
 	Load(L"Resources/box.cmo");
+	//あたり判定の初期化
 	PlayerHit.Initialize();
 	PlayerRangeHit.Initialize();
 
+	//直径を追加
 	PlayerRangeHit.SetLocalRadius(20.0f);
-	
-	//デバック関数
 	PlayerRangeHit.SetTrans(GetTranslation());
-
 	PlayerRangeHit.Update();
 }
 
@@ -162,6 +162,28 @@ void Player::Jamp()
 }
 
 /// <summary>
+/// 関数名	ストップ
+/// 引数	void
+/// 戻り値	void
+/// </summary>
+void Player::Stop()
+{
+	//今後変更あり
+
+	//現在不具合（特定の場所
+	//キーを二つ入力することに対応してない
+	Vector3 moveV(0, 0, 0.1f);
+	PlayerAngle = this->GetRotation().y;
+	CameraAngle = Playercamera->GetAngle();
+
+	Matrix rotmat = Matrix::CreateRotationY(PlayerAngle);
+	//移動量ベクトルを自機の角度分回転させる
+	moveV = Vector3::TransformNormal(moveV, rotmat);
+	Vector3 pos = this->GetTranslation();
+	this->SetTranslation(pos + moveV);
+}
+
+/// <summary>
 /// 更新処理
 /// </summary>
 void Player::Update()
@@ -196,10 +218,16 @@ void Player::Update()
 		Jamp();
 	}
 
+	//あたり判定の
 	PlayerHit.SetTrans(GetTranslation());
 	PlayerRangeHit.SetTrans(GetTranslation()+Vector3(0,0.5f,0));
 }
 
+/// <summary>
+/// 関数名	再更新
+/// 引数	void
+/// 返り値	void
+/// </summary>
 void Player::ReUpdate()
 {
 	Object3D::Update();
@@ -217,7 +245,7 @@ void Player::Render()
 /// <summary>
 /// キーボードの情報を取得
 /// </summary>
-/// <param name="key"></param>
+/// <param name="key">Keyboardのポインタ</param>
 void Player::SetKeyBoard(DirectX::Keyboard * key)
 {
 	KeyBoard = key;
@@ -226,17 +254,29 @@ void Player::SetKeyBoard(DirectX::Keyboard * key)
 /// <summary>
 /// カメラの情報を取得
 /// </summary>
-/// <param name="camera"></param>
+/// <param name="camera">TpsCameraのポイント</param>
 void Player::SetPlayerCamera(TpsCamera * camera)
 {
 	Playercamera = camera;
 }
 
+/// <summary>
+/// 関数名	プレイヤーのボックス判定を返す
+/// </summary>
+/// 引数　	void
+/// 返り値
+/// <returns>プレイヤーのBoxNode</returns>
 BoxNode& Player::GetPlayerHitBox()
 {
 	return PlayerHit;
 }
 
+/// <summary>
+/// 関数名	プレイヤーの球判定を返す
+/// </summary>
+/// 引数　	void
+/// 返り値
+/// <returns>プレイヤーのSphereNode</returns>
 SphereNode & Player::GetPlayerHitRange()
 {
 	return PlayerRangeHit;
