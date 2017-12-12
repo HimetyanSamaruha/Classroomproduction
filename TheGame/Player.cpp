@@ -45,7 +45,7 @@ void Player::Initialize()
 	PlayerRangeHit.Initialize();
 
 	//’¼Œa‚ð’Ç‰Á
-	PlayerRangeHit.SetLocalRadius(20.0f);
+	PlayerRangeHit.SetLocalRadius(40.0f);
 	PlayerRangeHit.SetTrans(GetTranslation());
 	PlayerRangeHit.Update();
 }
