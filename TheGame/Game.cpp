@@ -114,44 +114,11 @@ void Game::Update(DX::StepTimer const& timer)
     // TODO: Add your game logic here.
 
 	camera->Update();
-
-	Stage1.Update();
-
 	player->Update();
+
+	Stage1.Update(player.get());
+
 	enemy->Update();
-
-	Vector3 p;
-
-	//あたり判定
-	for (int i = 0; i < Stage1.GetTrees(); i++)
-	{
-		//木とプレイヤーのあたり判定
-		Box Player = player->GetPlayerHitBox();
-		Box ki = Stage1.GetTreesHit(i);
-
-		//あたり判定するを許可する範囲
-		Sphere Range = player->GetPlayerHitRange();
-		
-		//この範囲の確認
-		//木の数が多いと重くなってしまう
-		if (CheckSphere2Box(Range, ki, &Vector3(0, 0, 0)))
-		{
-			Stage1.ViewChangeOn(i);
-			//ヒットしたら
-			if (CheckBox2BoxAABB(Player, ki, &p))
-			{
-				//仮変数
-				player->Stop();
-			}
-		}
-		else
-		{
-			//それ以外
-			Stage1.ViewChangeOff(i);
-		}
-	}
-	//再更新
-	player->ReUpdate();
 
     elapsedTime;
 }

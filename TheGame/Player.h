@@ -35,7 +35,10 @@ private:
 	//あたり判定の形
 	BoxNode PlayerHit;
 
+	//描画によるあたり判定を確認するあたり判定
 	SphereNode PlayerRangeHit;
+
+	DirectX::SimpleMath::Vector3 moveV;
 
 public:
 
@@ -66,6 +69,7 @@ public:
 	void SetPlayerCamera(TpsCamera* camera);
 
 	//ゲット関数
+	float GetPlayerAnle();
 	BoxNode& GetPlayerHitBox();
 	SphereNode& GetPlayerHitRange();
 };

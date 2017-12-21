@@ -7,7 +7,7 @@
 /// インクルード
 /// </summary>
 #include "../Object/Object.h"
-#include "../../Tree.h"
+#include "../../Player.h"
 #include <vector>
 
 //ステージの根幹
@@ -19,12 +19,14 @@ private:
 	std::vector<Object3D> Stage;
 
 	//木モデル
-	Tree Tree;
+	std::vector<Object3D> Trees;
+	std::vector<BoxNode> TreeHit;
 
-	enum NUMBER
-	{
+	//オンオフ
+	std::vector<bool> View;
 
-	};
+	//プレイヤーの情報を取得
+	Player* Opkayer;
 
 public:
 
@@ -40,16 +42,8 @@ public:
 	//描画
 	void Draw() override;
 
-	//木の判定を渡す
-	BoxNode& GetTreesHit(int i);
-
-	//表示非表示
-	void ViewChangeOn(int numbr);
-	void ViewChangeOff(int numbr);
-
 	//中身現在空
-	void Update();
+	void Update(Player* player);
 
-	//デバック呼び出し関数
-	int GetTrees();
+	float Randm(float min, float max);
 };

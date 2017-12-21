@@ -29,9 +29,6 @@
     <Filter Include="Enemy">
       <UniqueIdentifier>{dd664234-d1e1-4f23-88fc-cc404fcb94e0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Tree">
-      <UniqueIdentifier>{64e54e22-f6b3-4b7b-bf77-fe534879c82c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Hit">
       <UniqueIdentifier>{b48ba6dc-6458-47bb-9e03-c6232b6c7a34}</UniqueIdentifier>
     </Filter>
@@ -67,9 +64,6 @@
     <ClInclude Include="Enemy.h">
       <Filter>Enemy</Filter>
     </ClInclude>
-    <ClInclude Include="Tree.h">
-      <Filter>Object\Tree</Filter>
-    </ClInclude>
     <ClInclude Include="Collision\Collision.h">
       <Filter>Hit</Filter>
     </ClInclude>
@@ -104,9 +98,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Player</Filter>
-    </ClCompile>
-    <ClCompile Include="Tree.cpp">
-      <Filter>Object\Tree</Filter>
     </ClCompile>
     <ClCompile Include="Enemy.cpp">
       <Filter>Enemy</Filter>

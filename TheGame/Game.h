@@ -17,8 +17,6 @@
 #include "Games\Object\Object.h"
 #include "Games\Stage\StageBese.h"
 
-#include "Tree.h"
-
 #include "Camera.h"
 #include "TpsCamera.h"
 #include "DebagCamera.h"
@@ -91,12 +89,18 @@ private:
 	DirectX::SimpleMath::Matrix m_view;
 	DirectX::SimpleMath::Matrix m_proj;
 
-	std::vector<Tree> trees;
-
+	//ステージ
 	StageBese Stage1;
 
+	//カメラ
 	std::unique_ptr<TpsCamera> camera;
 
+	//プレイヤー
 	std::unique_ptr<Player> player;
+
+	//敵
 	std::unique_ptr<Enemy> enemy;
+
+	//重力
+	DirectX::SimpleMath::Vector3 Velocity;
 };

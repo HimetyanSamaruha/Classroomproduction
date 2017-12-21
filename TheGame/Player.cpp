@@ -48,6 +48,8 @@ void Player::Initialize()
 	PlayerRangeHit.SetLocalRadius(40.0f);
 	PlayerRangeHit.SetTrans(GetTranslation());
 	PlayerRangeHit.Update();
+
+	moveV = Vector3(0, 0, 0);
 }
 
 /// <summary>
@@ -57,7 +59,7 @@ void Player::Initialize()
 /// </summary>
 void Player::Up()
 {
-	Vector3 moveV(0, 0, -0.1f);
+	moveV = Vector3 (0, 0, -0.1f);
 
 	PlayerAngle = GetRotation().y;
 	CameraAngle = Playercamera->GetAngle();
@@ -83,7 +85,7 @@ void Player::Up()
 /// </summary>
 void Player::Down()
 {
-	Vector3 moveV(0, 0, -0.1f);
+	moveV = Vector3 (0, 0, -0.1f);
 
 	PlayerAngle = this->GetRotation().y;
 	CameraAngle = Playercamera->GetAngle();
@@ -176,6 +178,13 @@ void Player::Stop()
 	PlayerAngle = this->GetRotation().y;
 	CameraAngle = Playercamera->GetAngle();
 
+	////多分ここを変更？
+	//dir = PlayerAngle - (CameraAngle + XMConvertToRadians(0.0f));
+	//if (dir != 0.0f)
+	//{
+	//	this->SetRotation(Vector3(0, CameraAngle + XMConvertToRadians(0.0f), 0));
+	//}
+
 	Matrix rotmat = Matrix::CreateRotationY(PlayerAngle);
 	//移動量ベクトルを自機の角度分回転させる
 	moveV = Vector3::TransformNormal(moveV, rotmat);
@@ -193,30 +202,11 @@ void Player::Update()
 	Tracker.Update(keystate);
 
 	//各キーボードの処理
-	if (keystate.W)
-	{
-		Up();
-	}
-
-	if (keystate.A)
-	{
-		Left();
-	}
-
-	if (keystate.D)
-	{
-		Right();
-	}
-
-	if (keystate.S)
-	{
-		Down();
-	}
-
-	if (keystate.Space)
-	{
-		Jamp();
-	}
+	if (keystate.W)	Up();
+	if (keystate.A)	Left();
+	if (keystate.D)	Right();
+	if (keystate.S)	Down();
+	if (keystate.Space)	Jamp();
 
 	//あたり判定の
 	PlayerHit.SetTrans(GetTranslation());
@@ -258,6 +248,11 @@ void Player::SetKeyBoard(DirectX::Keyboard * key)
 void Player::SetPlayerCamera(TpsCamera * camera)
 {
 	Playercamera = camera;
+}
+
+float Player::GetPlayerAnle()
+{
+	return PlayerAngle;
 }
 
 /// <summary>

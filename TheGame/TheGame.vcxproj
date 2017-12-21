@@ -170,7 +170,6 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="StepTimer.h" />
     <ClInclude Include="TpsCamera.h" />
-    <ClInclude Include="Tree.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
@@ -190,7 +189,6 @@
     </ClCompile>
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="TpsCamera.cpp" />
-    <ClCompile Include="Tree.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc" />
