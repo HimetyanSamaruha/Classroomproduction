@@ -160,3 +160,29 @@ void CapsuleNode::SetPos()
 
 	Segment.Start = Vector3(Segment.End.x, Segment.End.y + m_height, Segment.End.z);
 }
+
+PlanarNode::PlanarNode()
+{
+}
+
+void PlanarNode::Initialize()
+{
+}
+
+void PlanarNode::Update()
+{
+}
+
+void PlanarNode::Render()
+{
+}
+
+void PlanarNode::SetVertex4(DirectX::SimpleMath::Vector3 Ver0, DirectX::SimpleMath::Vector3 Ver1, DirectX::SimpleMath::Vector3 Ver2, DirectX::SimpleMath::Vector3 Ver3)
+{
+	//0,1‚Í‘O
+	Vertex[0] = Ver0;
+	Vertex[1] = Ver1;
+	//2,3‚ÍŒã
+	Vertex[2] = Ver2;
+	Vertex[3] = Ver3;
+}

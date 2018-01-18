@@ -127,3 +127,19 @@ public:
 	//SgmentのEndの座標を受け取る？
 	DirectX::SimpleMath::Vector3 GetTrans() { return m_Trans; }
 };
+
+//自作
+class PlanarNode :public CollisionNode, public Planar
+{
+public:
+	PlanarNode();
+
+	void Initialize();
+
+	void Update();
+
+	void Render();
+
+	//大きさを設定する(長方形、正方形を想定
+	void SetVertex4(DirectX::SimpleMath::Vector3 Ver0, DirectX::SimpleMath::Vector3 Ver1, DirectX::SimpleMath::Vector3 Ver2, DirectX::SimpleMath::Vector3 Ver3);
+};

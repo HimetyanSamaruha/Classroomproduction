@@ -79,13 +79,17 @@ void Game::Initialize(HWND window, int width, int height)
 	//敵の生成
 	enemy = std::make_unique<Enemy>();
 	enemy->Initialize();
-	enemy->SetTranslation(Vector3(0, 0, -30));
+	enemy->SetTranslation(Vector3(Stage1.Randm(-50,50), 0, Stage1.Randm(-50, 50)));
 
 	//カメラの視点をプレイヤーにセット
 	camera->SetObject3D(player.get());
 
 	//カメラの情報をプレイヤーにセット
 	player->SetPlayerCamera(camera.get());
+
+	C = false;
+
+	font = std::make_unique<SpriteFont>(m_d3dDevice.Get(), L"myfile.spritefont");
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
@@ -119,6 +123,14 @@ void Game::Update(DX::StepTimer const& timer)
 	Stage1.Update(player.get());
 
 	enemy->Update();
+
+	Box P = player->GetPlayerHitBox();
+	Box E = enemy->GetBox();
+
+	if (CheckBox2BoxAABB(P, E, nullptr))
+	{
+		//C = true;
+	}
 
     elapsedTime;
 }
@@ -158,6 +170,20 @@ void Game::Render()
 	m_d3dContext->IASetInputLayout(m_inputLayout.Get());
 
 	m_batch->Begin();
+
+	spriteBatch->Begin();
+
+	if (C == true)
+	{
+		const wchar_t* output = L"SPEED";
+
+		Vector2 origin = font->MeasureString(output) / 2.f;
+
+		//モジフォントの表示
+		font->DrawString(spriteBatch.get(), output,
+			Vector2(180, 300), Colors::White, 0.f, origin);
+	}
+	spriteBatch->End();
 	
 	m_batch->End();
 
@@ -439,6 +465,7 @@ void Game::CreateResources()
     DX::ThrowIfFailed(m_d3dDevice->CreateDepthStencilView(depthStencil.Get(), &depthStencilViewDesc, m_depthStencilView.ReleaseAndGetAddressOf()));
 
     // TODO: Initialize windows-size dependent objects here.
+	spriteBatch = std::make_unique<SpriteBatch>(m_d3dContext.Get());
 }
 
 void Game::OnDeviceLost()

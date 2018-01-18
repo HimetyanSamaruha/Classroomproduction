@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Games\Object\Object.h"
+#include "Collision\CollisionNode.h"
 
 class Enemy:public Object3D
 {
@@ -10,6 +11,8 @@ private:
 
 	//AI—p
 	DirectX::SimpleMath::Vector3 w;
+
+	BoxNode box;
 
 public:
 	Enemy();
@@ -22,4 +25,9 @@ public:
 	float DoAi(int i);
 
 	void GetPlayerPos(DirectX::SimpleMath::Vector3 playerpos);
+
+	BoxNode& GetBox()
+	{
+		return box;
+	}
 };

@@ -523,6 +523,28 @@ float GetSqDistanceSegment2Segment(const Segment& _segment0, const Segment& _seg
 	return v.Dot(v);
 }
 
+bool CheckPlane2box(const Planar & _planer, const Box & _box, DirectX::SimpleMath::Vector3 * _inter)
+{
+	//囲う線を一時的に作成
+	Segment segment[2];
+
+	segment[0].Start = _planer.Vertex[0];
+	segment[0].End = _planer.Vertex[1];
+
+	segment[1].Start = _planer.Vertex[2];
+	segment[1].End = _planer.Vertex[3];
+
+	//箱の底辺の頂点と平面のあたり判定
+	//if (segment[0].Start <= _box.)
+	{
+		//当たった
+		return true;
+	}
+
+	//当たらなかった
+	return false;
+}
+
 // 最小値と最大値の間にクランプする
 inline float Clamp(float _x, float _min, float _max)
 {

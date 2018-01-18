@@ -80,6 +80,14 @@ public:
 	}
 };
 
+//自作の平面クラス
+class Planar
+{
+public:
+	//四つの頂点
+	DirectX::SimpleMath::Vector3 Vertex[4];
+};
+
 //各種処理
 
 //球と球のあたり判定
@@ -106,4 +114,7 @@ bool CheckCapsule2Capsule(Capsule _0, Capsule _1);
 bool CheckCapsuleSphere2Box(const Capsule& _Capsule, const Box& _box, DirectX::SimpleMath::Vector3* _inter);
 //カプセルと球のあたり判定
 bool CheckCapsule2Sphere(const Capsule& _Capsule, const Sphere& _sphere, DirectX::SimpleMath::Vector3* _inter);
+
+//箱と平面のあたり判定(基本地面との判定
+bool CheckPlane2box(const Planar& _planer,const Box& _box,DirectX::SimpleMath::Vector3* _inter);
 inline float Clamp(float _x, float _min, float _max);

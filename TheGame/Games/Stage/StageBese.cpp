@@ -47,6 +47,11 @@ void StageBese::Initialize()
 	TreeHit.resize(Trees.size());
 	View.resize(Trees.size());
 
+	//重力を作成
+	Gravity = Vector3(0, 0.001f, 0);
+
+	Ground.SetTrans(Stage[1].GetTranslation());
+	
 	//初期化
 	for (int i = 0; i < Trees.size(); i++)
 	{
@@ -68,6 +73,8 @@ void StageBese::Initialize()
 		//表示非表示のフラグの初期化（false）
 		View[i] = false;
 	}
+
+	Time = 0.0f;
 }
 
 /// <summary>
@@ -91,9 +98,6 @@ void StageBese::Draw()
 		//if (View[i] == true)
 		{
 			Trees[i].Draw();
-
-			//デバック表示
-			TreeHit[i].Render();
 		}
 	}
 }
@@ -105,13 +109,15 @@ void StageBese::Draw()
 /// </summary>
 void StageBese::Update(Player * player)
 {
-	//木を描画
+	//重力をかける
+	/*Vector3 pos = player->GetTranslation();
+	player->SetTranslation(pos + Gravity);*/
+
+
 	for (int i = 0; i < Trees.size(); i++)
 	{
-		if (View[i] == true)
-		{
-			Trees[i].Update();
-		}
+		Trees[i].SetRotation(Vector3(0, player->GetCameraAngle(),0));
+		Trees[i].Update();
 	}
 
 	//木とプレイヤーのあたり判定
@@ -126,7 +132,7 @@ void StageBese::Update(Player * player)
 		Sphere Range = player->GetPlayerHitRange();
 		
 		//この範囲の確認
-		//木の数が多いと重くなってしまう
+		//木の数が多いと重くなってしまう（リリースで解決）
 		//if (CheckSphere2Box(Range, ki, &Vector3(0, 0, 0)))
 		{
 			//Stage1.ViewChangeOn(i);
@@ -143,8 +149,11 @@ void StageBese::Update(Player * player)
 		//	Stage1.ViewChangeOff(i);
 		//}
 	}
+	//あたり判定による再度更新
 	player->ReUpdate();
 
+	
+	Time++;
 }
 
 /// <summary>

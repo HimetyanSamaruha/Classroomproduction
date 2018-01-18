@@ -22,11 +22,19 @@ private:
 	std::vector<Object3D> Trees;
 	std::vector<BoxNode> TreeHit;
 
+	//地面の判定
+	BoxNode Ground;
+
 	//オンオフ
 	std::vector<bool> View;
 
 	//プレイヤーの情報を取得
 	Player* Opkayer;
+
+	//重力
+	DirectX::SimpleMath::Vector3 Gravity;
+
+	float Time;
 
 public:
 

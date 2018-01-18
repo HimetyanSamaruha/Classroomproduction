@@ -14,11 +14,18 @@ Enemy::~Enemy()
 void Enemy::Initialize()
 {
 	Load(L"Resources/box.cmo");
+
+	box.Initialize();
+	//あたり判定の位置をセット
+	box.SetTrans(GetTranslation());
+	//当たり判定の位置を更新
+	box.Update();
 }
 
 void Enemy::Update()
 {
 	Object3D::Update();
+	box.Update();
 }
 
 float Enemy::DoAi(int i)

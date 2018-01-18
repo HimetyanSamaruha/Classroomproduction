@@ -20,6 +20,7 @@ Player::Player()
 	PlayerAngle = 0.0f;
 	CameraAngle = 0.0f;
 	dir = 0.0f;
+	JumpTime = 0.0f;
 }
 
 /// <summary>
@@ -160,7 +161,13 @@ void Player::Left()
 /// </summary>
 void Player::Jamp()
 {
-	
+	//moveV = Vector3(0, -0.3f, 0);
+	moveV = Vector3(0, -0.3f, 0);
+
+	Matrix rotmat = Matrix::CreateRotationY(PlayerAngle);
+	moveV = Vector3::TransformNormal(moveV, rotmat);
+	Vector3 pos = this->GetTranslation();
+	this->SetTranslation(pos + moveV);
 }
 
 /// <summary>
@@ -206,7 +213,16 @@ void Player::Update()
 	if (keystate.A)	Left();
 	if (keystate.D)	Right();
 	if (keystate.S)	Down();
-	if (keystate.Space)	Jamp();
+	if (Tracker.IsKeyPressed(Keyboard::Space))
+	{
+		JumpTime = 2.0f;
+	}//Jamp();
+
+	if (JumpTime > 0)
+	{
+		JumpTime--;
+		Jamp();
+	}
 
 	//‚ ‚½‚è”»’è‚Ì
 	PlayerHit.SetTrans(GetTranslation());
@@ -229,7 +245,7 @@ void Player::ReUpdate()
 void Player::Render()
 {
 	PlayerHit.Render();
-	PlayerRangeHit.Render();
+	//PlayerRangeHit.Render();
 }
 
 /// <summary>
@@ -275,4 +291,9 @@ BoxNode& Player::GetPlayerHitBox()
 SphereNode & Player::GetPlayerHitRange()
 {
 	return PlayerRangeHit;
+}
+
+float Player::GetCameraAngle()
+{
+	return 0;
 }

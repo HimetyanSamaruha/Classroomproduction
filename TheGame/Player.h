@@ -38,6 +38,9 @@ private:
 	//描画によるあたり判定を確認するあたり判定
 	SphereNode PlayerRangeHit;
 
+	//ジャンプのタイム
+	float JumpTime;
+
 	DirectX::SimpleMath::Vector3 moveV;
 
 public:
@@ -72,4 +75,6 @@ public:
 	float GetPlayerAnle();
 	BoxNode& GetPlayerHitBox();
 	SphereNode& GetPlayerHitRange();
+	float GetCameraAngle();
+	
 };
