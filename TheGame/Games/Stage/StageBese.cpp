@@ -48,7 +48,7 @@ void StageBese::Initialize()
 	View.resize(Trees.size());
 
 	//重力を作成
-	Gravity = Vector3(0, 0.001f, 0);
+	Gravity = Vector3(0, -1, 0);
 
 	Ground.SetTrans(Stage[1].GetTranslation());
 	
@@ -57,7 +57,7 @@ void StageBese::Initialize()
 	{
 		//モデル関連
 		//モデルをロード
-		Trees[i].Load(L"Resources/tree.cmo");
+		Trees[i].Load(L"Resources/tree2.cmo");
 		//ポジションを設定
 		Trees[i].SetTranslation(Vector3(Randm(-100, 100), 0, Randm(-100, 100)));
 		//ポジションを更新
@@ -75,6 +75,9 @@ void StageBese::Initialize()
 	}
 
 	Time = 0.0f;
+
+//	land.Initialize(L"ground200m", L"ground200m");
+//	land.SetTrans(Vector3(0, 0, 0));
 }
 
 /// <summary>
@@ -100,6 +103,8 @@ void StageBese::Draw()
 			Trees[i].Draw();
 		}
 	}
+
+	//land.Draw();
 }
 
 /// <summary>
@@ -109,14 +114,9 @@ void StageBese::Draw()
 /// </summary>
 void StageBese::Update(Player * player)
 {
-	//重力をかける
-	/*Vector3 pos = player->GetTranslation();
-	player->SetTranslation(pos + Gravity);*/
-
-
 	for (int i = 0; i < Trees.size(); i++)
 	{
-		Trees[i].SetRotation(Vector3(0, player->GetCameraAngle(),0));
+		Trees[i].SetRotation(player->GetRotation());
 		Trees[i].Update();
 	}
 
@@ -151,7 +151,6 @@ void StageBese::Update(Player * player)
 	}
 	//あたり判定による再度更新
 	player->ReUpdate();
-
 	
 	Time++;
 }

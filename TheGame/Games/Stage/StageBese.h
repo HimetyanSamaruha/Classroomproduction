@@ -10,6 +10,9 @@
 #include "../../Player.h"
 #include <vector>
 
+
+#include "../../LandShapeTest/LandShape.h"
+
 //ステージの根幹
 class StageBese:public Object3D
 {
@@ -35,6 +38,8 @@ private:
 	DirectX::SimpleMath::Vector3 Gravity;
 
 	float Time;
+
+	//LandShape land;
 
 public:
 

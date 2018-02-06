@@ -538,7 +538,7 @@ bool CheckPlane2box(const Planar & _planer, const Box & _box, DirectX::SimpleMat
 	//if (segment[0].Start <= _box.)
 	{
 		//“–‚½‚Á‚½
-		return true;
+		//return true;
 	}
 
 	//“–‚½‚ç‚È‚©‚Á‚½

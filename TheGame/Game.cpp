@@ -68,6 +68,15 @@ void Game::Initialize(HWND window, int width, int height)
 	camera->SetKeyboard(keyboard.get());
 	Object3D::InitielizeStatic(m_d3dDevice.Get(), m_d3dContext.Get(),camera.get());
 
+
+	//
+	/*LandShapeCommonDef lscdef;
+	lscdef.pDevice = m_d3dDevice.Get();
+	lscdef.pDeviceContext = m_d3dContext.Get();
+	lscdef.pCamera = camera.get();
+	LandShape::InitializeCommon(lscdef);*/
+	//
+
 	//森ステージの生成
 	Stage1.Initialize();
 
@@ -87,9 +96,9 @@ void Game::Initialize(HWND window, int width, int height)
 	//カメラの情報をプレイヤーにセット
 	player->SetPlayerCamera(camera.get());
 
-	C = false;
+	//C = false;
 
-	font = std::make_unique<SpriteFont>(m_d3dDevice.Get(), L"myfile.spritefont");
+	//font = std::make_unique<SpriteFont>(m_d3dDevice.Get(), L"myfile.spritefont");
 
     // TODO: Change the timer settings if you want something other than the default variable timestep mode.
     // e.g. for 60 FPS fixed timestep update logic, call:
@@ -123,14 +132,6 @@ void Game::Update(DX::StepTimer const& timer)
 	Stage1.Update(player.get());
 
 	enemy->Update();
-
-	Box P = player->GetPlayerHitBox();
-	Box E = enemy->GetBox();
-
-	if (CheckBox2BoxAABB(P, E, nullptr))
-	{
-		//C = true;
-	}
 
     elapsedTime;
 }
@@ -171,19 +172,19 @@ void Game::Render()
 
 	m_batch->Begin();
 
-	spriteBatch->Begin();
+	//spriteBatch->Begin();
 
-	if (C == true)
-	{
-		const wchar_t* output = L"SPEED";
+	//if (C == true)
+	//{
+	//	const wchar_t* output = L"SPEED";
 
-		Vector2 origin = font->MeasureString(output) / 2.f;
+	//	Vector2 origin = font->MeasureString(output) / 2.f;
 
-		//モジフォントの表示
-		font->DrawString(spriteBatch.get(), output,
-			Vector2(180, 300), Colors::White, 0.f, origin);
-	}
-	spriteBatch->End();
+	//	//モジフォントの表示
+	//	font->DrawString(spriteBatch.get(), output,
+	//		Vector2(180, 300), Colors::White, 0.f, origin);
+	//}
+	//spriteBatch->End();
 	
 	m_batch->End();
 
@@ -465,7 +466,7 @@ void Game::CreateResources()
     DX::ThrowIfFailed(m_d3dDevice->CreateDepthStencilView(depthStencil.Get(), &depthStencilViewDesc, m_depthStencilView.ReleaseAndGetAddressOf()));
 
     // TODO: Initialize windows-size dependent objects here.
-	spriteBatch = std::make_unique<SpriteBatch>(m_d3dContext.Get());
+	//spriteBatch = std::make_unique<SpriteBatch>(m_d3dContext.Get());
 }
 
 void Game::OnDeviceLost()

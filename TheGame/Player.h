@@ -43,6 +43,8 @@ private:
 
 	DirectX::SimpleMath::Vector3 moveV;
 
+	DirectX::SimpleMath::Vector3 Vec;
+
 public:
 
 	//コンストラクタデストラクタ
@@ -75,6 +77,9 @@ public:
 	float GetPlayerAnle();
 	BoxNode& GetPlayerHitBox();
 	SphereNode& GetPlayerHitRange();
-	float GetCameraAngle();
-	
+
+	DirectX::SimpleMath::Vector3 GetVec()
+	{
+		return Vec;
+	}
 };

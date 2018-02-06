@@ -14,6 +14,7 @@ using namespace std;
 
 /// <summary>
 /// コンストラクタ
+/// 各変数の初期化
 /// </summary>
 Player::Player()
 {
@@ -40,10 +41,12 @@ Player::~Player()
 void Player::Initialize()
 {
 	//モデルデータのロード
-	Load(L"Resources/box.cmo");
+	Load(L"Resources/box2.cmo");
 	//あたり判定の初期化
 	PlayerHit.Initialize();
 	PlayerRangeHit.Initialize();
+
+	SetTranslation(Vector3(0, 0, 0));
 
 	//直径を追加
 	PlayerRangeHit.SetLocalRadius(40.0f);
@@ -51,6 +54,7 @@ void Player::Initialize()
 	PlayerRangeHit.Update();
 
 	moveV = Vector3(0, 0, 0);
+	Vec = Vector3(0, -0.1f, 0);
 }
 
 /// <summary>
@@ -291,9 +295,4 @@ BoxNode& Player::GetPlayerHitBox()
 SphereNode & Player::GetPlayerHitRange()
 {
 	return PlayerRangeHit;
-}
-
-float Player::GetCameraAngle()
-{
-	return 0;
 }

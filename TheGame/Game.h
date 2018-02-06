@@ -24,7 +24,7 @@
 #include "Player.h"
 #include "Enemy.h"
 
-#include <SpriteFont.h>
+//#include "LandShapeTest\LandShape.h"
 
 // A basic game implementation that creates a D3D11 device and
 // provides a game loop.
@@ -106,8 +106,6 @@ private:
 	//èdóÕ
 	DirectX::SimpleMath::Vector3 Velocity;
 
-	std::unique_ptr<DirectX::SpriteFont> font;
-	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;
-
-	bool C;
+	/*std::unique_ptr<DirectX::SpriteFont> font;
+	std::unique_ptr<DirectX::SpriteBatch> spriteBatch;*/
 };
